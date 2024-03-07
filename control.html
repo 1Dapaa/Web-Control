@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Controller</title>
+</head>
+<body>
+    <button id="playBtn">Play</button>
+    <button id="pauseBtn">Pause</button>
+    <video id="videoPlayer" width="320" height="240">
+        <source src="video1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <script>
+        const socket = new WebSocket('ws://localhost:3000');
+        
+        document.getElementById('playBtn').addEventListener('click', () => {
+            socket.send('play');
+        });
+
+        document.getElementById('pauseBtn').addEventListener('click', () => {
+            socket.send('pause');
+        });
+
+        document.getElementById('playBtn').addEventListener('click', function() {
+            var video = document.getElementById('videoPlayer');
+            video.play().catch(function(error) {
+                console.error('Error starting video playback:', error);
+            });
+        });
+    </script>
+</body>
+</html>
